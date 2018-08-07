@@ -3,22 +3,27 @@
 require './deck'
 require './hand'
 
-# class Blackjack
+puts 'What is your name?'
+name = gets.chomp
 
 deck = Deck.new
-player = Hand.new
+players_hand = Hand.new(name)
 
-def self.deal_card(player, deck, num_of_cards)
+def self.deal_card(players_hand, deck, num_of_cards)
   num_of_cards.times do
-    player.add_card(deck.draw_card)
+    players_hand.add_card(deck.draw_card)
   end
 end
 
-deal_card(player, deck, 2)
+def self.show_cards_and_points(player)
+  puts "#{player.name}'s cards:"
+  player.cards.each do |card|
+    puts "  #{card.english_value} of #{card.suit}"
+  end
+  puts "Total points: #{player.points}"
+end
 
-puts 'Your hand contains:'
-player.print_cards
+deal_card(players_hand, deck, 2)
 
-player.calculate_points
+show_cards_and_points(players_hand)
 
-puts "Total points: #{player.points}"
