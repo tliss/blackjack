@@ -1,17 +1,24 @@
+#!/usr/bin/env ruby
+
 require './deck'
 require './hand'
 
-class Blackjack
-  deck = Deck.new
-  players_hand = Hand.new
+# class Blackjack
 
-  players_hand.add_card(deck.draw_card)
-  players_hand.add_card(deck.draw_card)
+deck = Deck.new
+player = Hand.new
 
-  puts 'Your hand contains:'
-  players_hand.print_cards
-
-  players_hand.calculate_points
-
-  puts "Total points: #{players_hand.points}"
+def self.deal_card(player, deck, num_of_cards)
+  num_of_cards.times do
+    player.add_card(deck.draw_card)
+  end
 end
+
+deal_card(player, deck, 2)
+
+puts 'Your hand contains:'
+player.print_cards
+
+player.calculate_points
+
+puts "Total points: #{player.points}"
